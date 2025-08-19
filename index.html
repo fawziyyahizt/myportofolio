@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fawziyyah Izzati Azima - Portfolio</title>
+    <style>
+        /* ==================== CSS CODE ==================== */
+
+        /* === PERUBAHAN: Font Baru (Poppins) & Palet Warna "Cosmic Gold" === */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #C71585;     /* Magenta cerah sebagai warna utama */
+            --secondary-color: #FFD700;  /* Emas sebagai warna sekunder dan aksen */
+            --accent-color: #FFD700;      /* Emas juga digunakan untuk aksen spesifik */
+            --text-color: #F5F5DC;        /* Warna krem (Beige) untuk teks agar nyaman dibaca */
+            --text-muted-color: rgba(245, 245, 220, 0.8);
+            --card-bg: rgba(20, 20, 30, 0.6); /* Latar belakang kartu yang lebih gelap dan tembus pandang */
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        @charset "utf-8";
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            /* === PERUBAHAN: Font dan Latar Belakang Gradient Baru === */
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            color: var(--text-color);
+            cursor: none;
+            background: linear-gradient(135deg, #10002b, #240046, #000000);
+            background-size: 400% 400%;
+            animation: animateGradient 15s ease infinite;
+        }
+
+        @keyframes animateGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cursor-aura {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            /* === PERUBAHAN: Warna aura kursor disesuaikan === */
+            background: radial-gradient(circle, rgba(199, 21, 133, 0.3) 0%, rgba(199, 21, 133, 0) 70%);
+            top: 0; left: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .background-showcase {
+            position: fixed;
+            top: -5%; left: -5%; width: 110%; height: 110%;
+            z-index: -1;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1vw; opacity: 0.1;
+            filter: blur(8px) saturate(0.8);
+        }
+
+        .bg-image-wrapper { width: 100%; height: 100%; }
+        .bg-image-wrapper img {
+            width: 100%; height: 100%; object-fit: cover;
+            animation: slowPan 40s infinite alternate ease-in-out;
+        }
+
+        .bg-image-wrapper:nth-child(2n) img { animation-delay: -10s; }
+        .bg-image-wrapper:nth-child(3n) img { animation-delay: -20s; }
+        .bg-image-wrapper:nth-child(4n) img { animation-delay: -30s; }
+        
+        @keyframes slowPan {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(5%, -5%); }
+        }
+
+        .section {
+            min-height: 100vh; position: relative; z-index: 1;
+            display: flex; align-items: center; justify-content: center;
+            padding: 100px 20px; 
+            background: transparent;
+        }
+        
+        #home { padding: 0; }
+        #contact, #ratecard { min-height: auto; padding-bottom: 120px; }
+        
+        .section::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+        
+        #home::before, #works::before, #about::before, #testimonials::before, #contact::before, #ratecard::before {
+            background: transparent;
+        }
+
+        .header {
+            position: fixed; top: 0; left: 0; right: 0; height: 80px;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border); z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px; transition: all 0.3s ease;
+        }
+        .header.scrolled { background: rgba(0, 0, 0, 0.9); height: 70px; }
+
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo { width: 50px; height: 50px; }
+        .logo svg { width: 100%; height: 100%; }
+        .logo-text { color: white; font-size: 24px; font-weight: 600; }
+
+        .main-menu { display: flex; align-items: center; gap: 40px; }
+        .menu-item { color: var(--text-muted-color); text-decoration: none; font-size: 16px; font-weight: 500; transition: all 0.3s ease; position: relative; padding: 8px 0; }
+        .menu-item:hover { color: white; }
+        .menu-item::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); transition: width 0.3s ease; }
+        .menu-item:hover::after, .menu-item.active::after { width: 100%; }
+        .menu-item.active { color: white; }
+        .menu-item.external::before { content: '↗'; margin-right: 5px; opacity: 0.7; }
+
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+        .menu-toggle span { width: 25px; height: 3px; background: white; margin: 3px 0; transition: 0.3s; border-radius: 2px; }
+
+        .coverflow-wrapper { width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; }
+        .coverflow-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; perspective: 1200px; position: relative; }
+        .coverflow { display: flex; align-items: center; justify-content: center; transform-style: preserve-3d; position: relative; width: 100%; height: 400px; }
+        .coverflow-item { position: absolute; width: 300px; height: 424px; transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); cursor: pointer; user-select: none; }
+        .coverflow-item .cover { width: 100%; height: 100%; border-radius: 10px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8); overflow: hidden; background: #333; }
+        .coverflow-item .cover img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+        .coverflow-item .reflection { position: absolute; top: 100%; left: 0; width: 100%; height: 100%; border-radius: 10px; transform: scaleY(-1); opacity: 0.2; filter: blur(2px); background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 1) 100%); overflow: hidden; }
+        .coverflow-item.active { z-index: 100; }
+        .coverflow-item.active .cover { box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9); }
+        .nav-button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); color: white; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; font-size: 24px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(10px); z-index: 200; }
+        .nav-button:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-50%) scale(1.1); }
+        .nav-button.prev { left: 50px; }
+        .nav-button.next { right: 50px; }
+        .dots-container { position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 200; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); cursor: pointer; transition: all 0.3s ease; }
+        .dot.active { background: white; transform: scale(1.3); }
+        .info { position: absolute; top: 120px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 200; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .info h2 { font-size: 32px; margin-bottom: 10px; animation: fadeIn 0.6s forwards; opacity: 0; }
+        .info p { font-size: 16px; opacity: 0.8; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .play-pause-button { position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(10px); z-index: 200; }
+        .play-pause-button:hover { background: rgba(255, 255, 255, 0.2); transform: translateX(-50%) scale(1.1); }
+        .play-pause-button .pause-icon { font-size: 16px; letter-spacing: 2px; }
+
+        .about-content, .section-container { max-width: 1200px; width: 100%; margin: 0 auto; padding: 40px 20px; }
+        .about-header, .section-title { text-align: center; margin-bottom: 40px; }
+        .about-header h2, .section-title h2 { font-size: 48px; margin-bottom: 20px; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        
+        .about-header p, .section-title p { font-size: 20px; color: var(--text-muted-color); max-width: 600px; margin: 0 auto; line-height: 1.8; }
+        .section-title .subtitle {
+            font-size: 16px;
+            font-style: italic;
+            margin-top: 10px;
+            color: var(--text-muted-color);
+        }
+
+        .about-header .slogan {
+            font-style: italic;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            color: var(--text-muted-color);
+        }
+        .about-header .slogan .quote {
+            display: block;
+            font-weight: 600;
+            margin-top: 10px;
+            font-style: normal;
+            color: var(--secondary-color); /* Menggunakan warna emas */
+        }
+        .about-header .highlight {
+            /* === PERUBAHAN: Warna highlight disesuaikan === */
+            color: pink;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .about-main { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; margin-bottom: 60px; }
+        .profile-picture { 
+            width: 180px; height: 180px; border-radius: 50%; object-fit: cover; 
+            border: 5px solid var(--primary-color); margin-bottom: 25px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            /* === PERUBAHAN: Warna glow disesuaikan === */
+            0% { box-shadow: 0 0 10px rgba(199, 21, 133, 0.4), 0 0 0 0px rgba(199, 21, 133, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(199, 21, 133, 0.8), 0 0 0 10px rgba(199, 21, 133, 0); }
+            100% { box-shadow: 0 0 10px rgba(199, 21, 133, 0.4), 0 0 0 0px rgba(199, 21, 133, 0.4); }
+        }
+
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; padding: 20px 0; }
+        .timeline::after { content: ''; position: absolute; width: 4px; background: linear-gradient(var(--primary-color), var(--secondary-color)); top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px; }
+        .timeline-item { padding: 10px 40px; position: relative; width: 50%; }
+        .timeline-item:nth-child(odd) { left: 0; }
+        .timeline-item:nth-child(even) { left: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 20px; height: 20px; right: -12px; background-color: var(--primary-color); border: 4px solid var(--secondary-color); top: 25px; border-radius: 50%; z-index: 1; }
+        .timeline-item:nth-child(even)::after { left: -8px; }
+        .timeline-content { padding: 20px 30px; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); position: relative; border-radius: 10px; }
+        .timeline-date { font-weight: 600; color: var(--primary-color); margin-bottom: 10px; }
+        .timeline-content h3 { margin-bottom: 10px; font-size: 1.2rem; }
+        .timeline-content p { font-size: 0.95rem; color: var(--text-muted-color); line-height: 1.6; }
+        .about-visual { position: relative; display: flex; align-items: center; justify-content: center; padding-top: 40px; }
+        .showcase-display { position: relative; width: 100%; max-width: 500px; display: flex; align-items: center; justify-content: center; }
+        .showcase-main { position: relative; width: 350px; min-height: 400px; background: linear-gradient(135deg, rgba(199, 21, 133, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%); border-radius: 30px; border: 2px solid var(--card-border); padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+        .showcase-logo { width: 120px; height: 120px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; box-shadow: 0 15px 35px rgba(199, 21, 133, 0.4); }
+        .showcase-logo svg { width: 70%; height: 70%; }
+        .showcase-title { font-size: 32px; font-weight: 700; color: white; margin-bottom: 15px; text-align: center; }
+        .showcase-subtitle { font-size: 16px; color: var(--text-muted-color); text-align: center; margin-bottom: 40px; line-height: 1.6; }
+        .showcase-badges { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+        .skill-item { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 80px; text-align: center; }
+        .skill-item img { width: 40px; height: 40px; object-fit: contain; filter: grayscale(50%) contrast(120%); } /* Sedikit desaturasi pada logo skill */
+        .skill-item span { font-size: 14px; color: var(--text-muted-color); }
+        .stats-section { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding: 40px; margin-top: 60px; background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 30px; border: 1px solid var(--card-border); }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 48px; font-weight: 700; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
+        .stat-label { font-size: 16px; color: var(--text-muted-color); }
+        
+        .subsection-title { text-align: left; margin-top: 60px; margin-bottom: 30px; padding-left: 20px; border-left: 4px solid var(--primary-color); }
+        .subsection-title:first-of-type { margin-top: 0; }
+        .subsection-title h3 { font-size: 32px; color: var(--text-color); }
+
+        .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+
+        .work-item, .testimonial-card { 
+            background: var(--card-bg); 
+            border-radius: 10px; 
+            border: 1px solid var(--card-border); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            position: relative; 
+            cursor: pointer; 
+            transform-style: preserve-3d;
+        }
+        .work-item { display: flex; flex-direction: column; }
+        .work-item:hover, .testimonial-card:hover { 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
+        }
+
+        .work-item .image-container { overflow: hidden; border-radius: 10px 10px 0 0; position: relative; }
+        .work-item img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; transition: transform 0.4s ease; }
+        .work-title { padding: 15px 20px; text-align: center; font-size: 1.1rem; font-weight: 600; color: var(--text-color); background: var(--card-bg); border-top: 1px solid var(--card-border); border-radius: 0 0 10px 10px; margin-top: auto; }
+
+        .work-item-poster .image-container { background-color: #000; }
+        .work-item-poster img { aspect-ratio: auto; object-fit: contain; padding: 10px; }
+
+        .view-work-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .view-work-button { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; text-decoration: none; padding: 12px 25px; border-radius: 30px; font-weight: 600; transform: scale(0.8); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
+
+        .work-item.work-item-active img { transform: scale(0.9); }
+        .work-item.work-item-active .view-work-overlay { opacity: 1; pointer-events: auto; }
+        .work-item.work-item-active .view-work-button { transform: scale(1); opacity: 1; }
+
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .testimonial-card { backdrop-filter: blur(10px); border-radius: 15px; padding: 30px; text-align: center; }
+        .testimonial-card blockquote { font-style: italic; color: var(--text-muted-color); margin-bottom: 20px; border: none; padding: 0; }
+        .testimonial-card .author { margin-top: 20px; }
+        .author-info h4 { margin: 0; font-size: 1.1rem; }
+        .author-info p { margin: 0; color: var(--accent-color); } /* Warna jabatan/posisi menjadi emas */
+        
+        .rate-details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            text-align: left;
+        }
+
+        .price-list, .add-ons {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .price-list h3, .add-ons h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--card-border);
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-item-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .price-item-info p {
+            font-size: 0.9rem !important;
+            color: var(--text-muted-color) !important;
+            max-width: none !important;
+            margin: 0 !important;
+            line-height: 1.5 !important;
+        }
+        
+        .price-range {
+            font-size: 1.1rem;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 20px;
+            color: var(--text-color);
+        }
+
+        .bonus-offer {
+            /* === PERUBAHAN: Warna bonus disesuaikan === */
+            background: rgba(199, 21, 133, 0.2);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .rate-card-section .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .rate-card-section .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(199, 21, 133, 0.4);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .contact-card:hover {
+            transform: translateY(-8px);
+            background: rgba(25, 25, 25, 0.9);
+        }
+        .contact-card svg {
+            width: 48px;
+            height: 48px;
+            fill: url(#grad1);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .contact-card:hover svg {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px var(--secondary-color));
+        }
+        .contact-card span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .footer { background: rgba(0, 0, 0, 0.95); border-top: 1px solid var(--card-border); padding: 40px 20px; position: relative; z-index: 2; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; }
+        .scroll-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; cursor: pointer; opacity: 0; transform: translateY(100px); transition: all 0.3s ease; z-index: 999; }
+        .scroll-to-top.visible { opacity: 1; transform: translateY(0); }
+        .scroll-to-top:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 30px rgba(199, 21, 133, 0.5); 
+        }
+
+        @media (max-width: 992px) {
+            .rate-details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-main { grid-template-columns: 1fr; }
+            .about-visual { order: -1; }
+            .timeline::after { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item:nth-child(even) { left: 0; }
+            .timeline-item::after { left: 10px; }
+            .works-grid { grid-template-columns: 1fr; }
+            .stats-section { grid-template-columns: 1fr 1fr; }
+            .main-menu { display: none; position: absolute; top: 100%; left:0; right:0; background: rgba(0,0,0,0.95); flex-direction: column; padding: 20px; border-bottom: 1px solid var(--card-border); }
+            .main-menu.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .menu-toggle.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+            .footer-content { flex-direction: column; gap: 20px; }
+            .cursor-aura { display: none; }
+            body { cursor: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-aura"></div>
+
+    <div class="background-showcase">
+        <div class="bg-image-wrapper"><img src="backdropp (2).png" alt="Background Artwork 1"></div>
+        <div class="bg-image-wrapper"><img src="CUE CARD HIMAKOM 2025.png" alt="Background Artwork 2"></div>
+        <div class="bg-image-wrapper"><img src="FLAYER HIMAKOM 2025.png" alt="Background Artwork 3"></div>
+        <div class="bg-image-wrapper"><img src="PHOTOBOOTH HIMAKOM 2025.png" alt="Background Artwork 4"></div>
+        <div class="bg-image-wrapper"><img src="BANNER SELAMAT DATANG.png" alt="Background Artwork 5"></div>
+        <div class="bg-image-wrapper"><img src="mentawai.jpg" alt="Background Artwork 6"></div>
+        <div class="bg-image-wrapper"><img src="medis.jpg" alt="Background Artwork 7"></div>
+        <div class="bg-image-wrapper"><img src="girl.jpg" alt="Background Artwork 8"></div>
+        <div class="bg-image-wrapper"><img src="komjar.jpg" alt="Background Artwork 9"></div>
+        <div class="bg-image-wrapper"><img src="struck.jpg" alt="Background Artwork 10"></div>
+        <div class="bg-image-wrapper"><img src="to be a woman.jpg" alt="Background Artwork 11"></div>
+        <div class="bg-image-wrapper"><img src="backdropp (2).png" alt="Background Artwork 12"></div>
+    </div>
+
+    <header class="header" id="header">
+        <a href="#home" class="logo-container">
+            <div class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:var(--primary-color);stop-opacity:1" /><stop offset="100%" style="stop-color:var(--secondary-color);stop-opacity:1" /></linearGradient></defs>
+                    <rect x="10" y="25" width="15" height="50" fill="url(#grad1)" transform="rotate(-15 17.5 50)" /><rect x="35" y="15" width="15" height="70" fill="url(#grad1)" /><rect x="60" y="25" width="15" height="50" fill="url(#grad1)" transform="rotate(15 67.5 50)" /><circle cx="50" cy="50" r="45" fill="none" stroke="url(#grad1)" stroke-width="2" opacity="0.5" />
+                </svg>
+            </div>
+            <div class="logo-text">My Portfolio</div>
+        </a>
+        <nav class="main-menu" id="mainMenu">
+            <a href="#home" class="menu-item active">Home</a>
+            <a href="#about" class="menu-item">About</a>
+            <a href="#works" class="menu-item">Karya</a>
+            <a href="#testimonials" class="menu-item">Testimoni</a>
+            <a href="#ratecard" class="menu-item">Rate Card</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </header>
+
+    <section id="home" class="section">
+        <div class="coverflow-wrapper">
+            <div class="info">
+                <h2 id="current-title">Mountain Landscape</h2>
+                <p id="current-description">Majestic peaks covered in snow during golden hour</p>
+            </div>
+            <div class="coverflow-container" tabindex="0">
+                <div class="coverflow" id="coverflow">
+                    <div class="coverflow-item" data-index="0"><div class="cover image-loading"><img src="komjar.jpg" alt="Mountain Landscape" loading="lazy"></div><div class="reflection"></div></div>
+                    <div class="coverflow-item" data-index="1"><div class="cover image-loading"><img src="medis.jpg" alt="Forest Path" loading="lazy"></div><div class="reflection"></div></div>
+                    <div class="coverflow-item" data-index="2"><div class="cover image-loading"><img src="struck.jpg" alt="Lake Reflection" loading="lazy"></div><div class="reflection"></div></div>
+                    <div class="coverflow-item" data-index="3"><div class="cover image-loading"><img src="mentawai.jpg" alt="Ocean Sunset" loading="lazy"></div><div class="reflection"></div></div>
+                    <div class="coverflow-item" data-index="4"><div class="cover image-loading"><img src="girl.jpg" alt="Desert Dunes" loading="lazy"></div><div class="reflection"></div></div>
+                    <div class="coverflow-item" data-index="5"><div class="cover image-loading"><img src="woman.jpg" alt="Starry Night" loading="lazy"></div><div class="reflection"></div></div>
+                </div>
+                <button class="nav-button prev" onclick="navigate(-1)">‹</button>
+                <button class="nav-button next" onclick="navigate(1)">›</button>
+                <div class="dots-container" id="dots"></div>
+                <button class="play-pause-button" id="playPauseBtn" onclick="toggleAutoplay()"><span class="play-icon">▶</span><span class="pause-icon" style="display: none;">❚❚</span></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="about-content">
+            <div class="about-header">
+                <img src="kak zk zi.jpg" alt="Foto Profil Fawziyyah" class="profile-picture">
+                <h2>Hello!</h2>
+                <div class="slogan">
+                    <p>Desainer Grafis untuk Mahasiswa dan Bisnis Lokal</p>
+                    <span class="quote">“Visual Kreatif, Solusi Efektif”</span>
+                </div>
+                <p>
+                    Aku Fawziyyah Izzati Azima, mahasiswa Ilmu Komunikasi yang tertarik dengan dunia <span class="highlight">desain grafis</span> dan <span class="highlight">branding visual</span>. Berpengalaman dalam desain media sosial, branding bisnis, dan visual event.
+                    <br><br>
+                    Aku udah bikin lebih dari <span class="highlight">40 desain utama </span> untuk <span class="highlight">15 klien</span>,  mulai dari individu, organisasi, sampai komunitas. Siap bikin <span class="highlight">desain yang menarik</span> dan sesuai dengan brand kamu!
+                </p> 
+            </div>
+            <div class="about-main">
+                <div class="about-visual">
+                    <div class="showcase-display">
+                        <div class="showcase-main">
+                            <div class="showcase-logo">
+                                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="25" width="15" height="50" fill="white" transform="rotate(-15 17.5 50)" opacity="0.9" /><rect x="35" y="15" width="15" height="70" fill="white" /><rect x="60" y="25" width="15" height="50" fill="white" transform="rotate(15 67.5 50)" opacity="0.9" /><circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="2" opacity="0.3" /></svg>
+                            </div>
+                            <h3 class="showcase-title">Desainer Grafis</h3>
+                            <p class="showcase-subtitle">My Skills & Tools</p>
+                            <div class="showcase-badges">
+                                <div class="skill-item"><img src="cava.jpeg" alt="Canva Logo"><span>Canva</span></div>
+                                <div class="skill-item"><img src="capcut.jpeg" alt="Capcut Logo"><span>Capcut</span></div>
+                                <div class="skill-item"><img src="lr.png" alt="Lightroom Logo"><span>Lightroom</span></div>
+                                <div class="skill-item"><img src="ip.jpeg" alt="Branding Icon"><span>Ibis Paint</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-info">
+                    <h3 class="section-title" style="text-align: left; margin-bottom: 40px; font-size: 36px;">Pengalaman Saya</h3>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">2022 - 2023</div><h3>Layanan Publik dan Informasi</h3><p>PIK-R Gerasi MAN 2 Kota Padang.</p></div></div>
+                        <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">September 2024</div><h3>Ketua Divisi Desain</h3><p>Panitia Pelantikan HIMAKOM FISIP UNRI.</p></div></div>
+                        <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">Okt - Des 2024</div><h3>Staf Magang KOMINFO</h3><p>HIMAKOM FISIP UNRI.</p></div></div>
+                        <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">Desember 2024</div><h3>Staf Magang Humas</h3><p>Koperasi Mahasiswa Universitas Riau.</p></div></div>
+                        <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">Februari 2025</div><h3>Panitia Pemira Ilmu Komunikasi</h3><p>Komite Pemilihan Umum Raya Ilmu Komunikasi.</p></div></div>
+                        <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">Maret 2025</div><h3>Magang Desainer Grafis</h3><p>Peka Nusantara.</p></div></div>
+                         <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">April 2025 -  Sekarang</div><h3>
+Staff Desain Komunikasi Visual bidang KOMINFO </h3><p>Koperasi Mahasiswa Universitas Riau</p></div></div>
+ <div class="timeline-item"><div class="timeline-content"><div class="timeline-date">Mei 2025</div><h3>Freelance Desainer Grafis</h3><p>Satoeide Creative Agency.</p></div></div>
+ <div class="timeline-item">
+    <div class="timeline-content"><div class="timeline-date">Juli 2025</div><h3>Koordinator Divisi Dokumentasi Malam Keakraban Jurusan Ilmu Komunikasi</h3><p>HIMAKOM FISIP UNRI</p></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-section">
+                <div class="stat-item"><div class="stat-number">60fps</div><div class="stat-label">Smooth</div></div>
+                <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Responsive</div></div>
+                <div class="stat-item"><div class="stat-number">3D</div><div class="stat-label">Effects</div></div>
+                <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">Creative</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="works" class="section">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Karya Saya</h2>
+                <p class="subtitle">Tekan gambar untuk melihat galeri karya di setiap kategori.</p>
+            </div>
+
+            <div class="subsection-title"><h3>Event</h3></div>
+            <div class="works-grid">
+                <div class="work-item tilt-card">
+                    <div class="image-container">
+                        <img src="banner.png" alt="Banner Karya 1">
+                        <div class="view-work-overlay">
+                            <a href="https://fawziyyahizt.github.io/pelantikanhimakom2025/" target="_blank" class="view-work-button">Lihat Galeri</a>
+                        </div>
+                    </div>
+                    <h4 class="work-title">Pelantikan Himakom Kabinet Arsatala Tahun 2025/2026</h4>
+                </div>
+                <div class="work-item tilt-card">
+                     <div class="image-container">
+                        <img src="BACKDROP HIMAKAOM.png" alt="Banner Karya 2">
+                        <div class="view-work-overlay">
+                            <a href="https://fawziyyahizt.github.io/pelantikanhimakom2024/" target="_blank" class="view-work-button">Lihat Galeri</a>
+                        </div>
+                    </div>
+                    <h4 class="work-title">Pelantikan Pengurus HIMAKOM & IKAKOM 2024/2025</h4>
+                </div>
+                <div class="work-item tilt-card">
+                     <div class="image-container">
+                        <img src="Invest In Your Healt (2000 x 1000 piksel)_20241107_090719_0000.png" alt="Banner Karya 2">
+                        <div class="view-work-overlay">
+                            <a href="https://fawziyyahizt.github.io/pelatihanmedis/" target="_blank" class="view-work-button">Lihat Galeri</a>
+                        </div>
+                    </div>
+                    <h4 class="work-title">Pelatihan Medis</h4>
+                </div>
+                <div class="work-item tilt-card">
+                     <div class="image-container">
+                        <img src="SPANDUK KOMJAR_20241124_131258_0000.png" alt="Banner Karya 2">
+                        <div class="view-work-overlay">
+                            <a href="https://fawziyyahizt.github.io/komjar/" target="_blank" class="view-work-button">Lihat Galeri</a>
+                        </div>
+                    </div>
+                    <h4 class="work-title">Komunikasi Mengajar</h4>
+                </div>
+            </div>
+
+            <div class="subsection-title"><h3>Curated Instagram Visuals</h3></div>
+            <div class="works-grid">
+                <div class="work-item tilt-card">
+                     <div class="image-container">
+                        <img src="WhatsApp Image 2025-08-12 at 22.28.14_1a417049.jpg" alt="Instagram Visual 1">
+                        <div class="view-work-overlay">
+                            <a href="https://fawziyyahizt.github.io/pekanusantara/" target="_blank" class="view-work-button">Lihat Galeri</a>
+                        </div>
+                    </div>
+                    <h4 class="work-title">Peka Nusantara</h4>
+                </div>
+                <div class="work-item tilt-card">
+                     <div class="image-container">
+                        <img src="WhatsApp Image 2025-08-12 at 22.25.01_0a0182d9.jpg" alt="Instagram Visual 2">
+                        <div class="view-work-overlay">
+                            <a href="https://fawziyyahizt.github.io/kopmaunri/" target="_blank" class="view-work-button">Lihat Galeri</a>
+                        </div>
+                    </div>
+                    <h4 class="work-title">KOPMA UNRI</h4>
+                </div>
+                <div class="work-item tilt-card">
+                     <div class="image-container">
+                        <img src="WhatsApp Image 2025-08-12 at 21.58.05_15fcd6c2.jpg" alt="Instagram Visual 3">
+                        <div class="view-work-overlay">
+                            <a href="https://fawziyyahizt.github.io/fimoleholeh1/" target="_blank" class="view-work-button">Lihat Galeri</a>
+                        </div>
+                    </div>
+                    <h4 class="work-title">Fim Oleh-Oleh</h4>
+                </div>
+            </div>
+
+            <div class="subsection-title"><h3>Poster</h3></div>
+            <div class="works-grid">
+                <div class="work-item tilt-card work-item-poster">
+                    <div class="image-container">
+                        <img src="2.jpg" alt="Poster 1">
+                        <div class="view-work-overlay">
+                            <a href="https://fawziyyahizt.github.io/poster/
+" target="_blank" class="view-work-button">Lihat Galeri</a>
+                        </div>
+                    </div>
+                    <h4 class="work-title">Instagram Story</h4>
+                </div>
+                <div class="work-item tilt-card work-item-poster">
+                    <div class="image-container">
+                        <img src="mentawai.jpg" alt="Poster 1">
+                        <div class="view-work-overlay">
+                            <a href="https://fawziyyahizt.github.io/instagramstory/" target="_blank" class="view-work-button">Lihat Galeri</a>
+                        </div>
+                    </div>
+                    <h4 class="work-title">Poster-Poster</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section">
+        <div class="section-container">
+            <div class="section-title"><h2>Testimoni</h2></div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card tilt-card">
+                    <blockquote>"Saya merasa Zizi adalah seorang yang ambisius dan telaten, karena selama Zizi magang di tim magang dinas pengabdian masyarakat, apapun yang ditugaskan itu dilaksakan dengan rapi dan tepat waktu. Hasil desainnya sendiri juga cakep tanpa memerlukan banyak revisi. Semangat terus."</blockquote>
+                    <div class="author"><div class="author-info"><h4>Razif</h4><p>Kepala Dinas Pengabdian Masyarakat Himpunan Mahasiswa Ilmu Komunikasi FISIP UNRI.</p></div></div>
+                </div>
+                <div class="testimonial-card tilt-card">
+                    <blockquote>"Dari yang saya ketahui, Fawziyyah Izzati Azima ini memang menyukai desain grafis. Hasil dari beberapa desain yang pernah saya lihat, desain yang dibuat oleh Fawziyyah ini mempunyai tema yang luas, tidak monoton, dan luar biasa bagus."</blockquote>
+                    <div class="author"><div class="author-info"><h4>Eden</h4><p>Teman</p></div></div>
+                </div>
+                 <div class="testimonial-card tilt-card">
+                    <blockquote>"Saya rasa zizi membuat desain dengan cepat tanggap dan hasilnya memuaskan. Kalau kalian malas ngedesain tapi ada tugas desain, bisa kali pakai jasa kakak ini coy, dijamin hasilnya mantap kalii! "</blockquote>
+                    <div class="author"><div class="author-info"><h4>Dafa</h4><p>Sekretaris Umum Koperasi Mahasiswa UNRI Tahun 2025</p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ratecard" class="section">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Daftar Harga</h2>
+                <p>Harga fleksibel dan dapat disesuaikan dengan tingkat kesulitan desain.</p>
+            </div>
+            <div class="rate-details-grid">
+                <div class="price-list">
+                    <h3>Harga Dasar</h3>
+                    <div class="price-item">
+                        <div class="price-item-info">
+                            <h4>Instagram Story / Feed</h4>
+                            <p>(Single post)</p>
+                        </div>
+                        <div class="price-range">Rp 30.000 - Rp 50.000</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-item-info">
+                            <h4>Carousel</h4>
+                            <p>(3-5 slide)</p>
+                        </div>
+                        <div class="price-range">Rp 80.000 - Rp 150.000</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-item-info">
+                            <h4>Poster Digital</h4>
+                            <p>(A4-A3, event, promosi, publikasi kampus/UMKM)</p>
+                        </div>
+                        <div class="price-range">Rp 35.000 - Rp 100.000</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-item-info">
+                            <h4>Banner / X-Banner</h4>
+                            <p>(Untuk event, backdrop, atau toko)</p>
+                        </div>
+                        <div class="price-range">Rp 150.000 - Rp 350.000</div>
+                    </div>
+                </div>
+                <div class="add-ons">
+                    <h3>Tambahan Layanan</h3>
+                    <div class="price-item">
+                        <div class="price-item-info"><h4>Revisi Tambahan</h4></div>
+                        <div class="price-range">Rp 10.000 - Rp 25.000</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-item-info">
+                            <h4>Pengerjaan Cepat</h4>
+                            <p>(1 hari jadi)</p>
+                        </div>
+                        <div class="price-range">+30% - 50%</div>
+                    </div>
+                    <div class="bonus-offer">
+                        ⭐ Pesan lebih dari 5 desain, GRATIS 1 desain!
+                    </div>
+                </div>
+            </div>
+            <a href="https://wa.me/6282171815956?text=Halo,%20saya%20tertarik%20untuk%20memesan%20desain." class="rate-card-section cta-button" target="_blank"></a>
+        </div>
+    </section>
+
+
+    <section id="contact" class="section">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Hubungi Saya</h2>
+                <p>Mari terhubung! Jangan ragu untuk menghubungi saya melalui platform di bawah ini.</p>
+            </div>
+            <div class="contact-grid">
+                <a href="mailto:fawziyyahizzatia@gmail.com" class="contact-card" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                    <span>Email</span>
+                </a>
+                <a href="https://www.instagram.com/fawziyyahizt_?igsh=bHpzbTNocThpeTVz" class="contact-card" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+                    <span>Instagram</span>
+                </a>
+               <a href="https://wa.me/6282171815956?text=Halo,%20saya%20tertarik%20dengan%20jasa%20desain%20Anda." class="contact-card" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.85L2 22l5.27-1.38c1.41.75 3 .17 4.73 1.17H12c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zM12 20.15c-1.55 0-2.98-.44-4.2-1.22l-.3-.18-3.12.82.83-3.04-.2-.31c-.86-1.28-1.3-2.82-1.3-4.44 0-4.54 3.68-8.22 8.22-8.22 4.54 0 8.22 3.68 8.22 8.22s-3.68 8.22-8.22 8.22zm4.35-6.03c-.2-.1-.58-.29-.68-.32-.09-.04-.16-.06-.33.23-.18.29-.68.83-.83.99-.15.16-.3.18-.55.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.48-1.38-1.73-.15-.25-.02-.38.09-.51.1-.11.23-.29.34-.43.11-.14.15-.25.23-.42.08-.17.04-.31-.02-.43-.06-.12-.55-1.32-.75-1.81-.2-.48-.4-.42-.55-.42h-.27c-.23 0-.5.1-.68.29-.18.18-.68.66-.68 1.61 0 .94.7 1.86.8 2 .1.13 1.37 2.1 3.32 2.92.44.19.78.3.97.46.45.36.75.29.97.18.22-.11.58-.47.66-.94.08-.47.08-.88.06-.94-.03-.06-.1-.1-.2-.2z"/></svg>
+    <span>WhatsApp</span>
+</a>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-copyright">© 2025 Portfolio Fawziyyah Izzati Azima. All rights reserved.</a></div>
+             <div class="footer-copyright">Dibuat oleh Anak Sistem Informasi UNRI Angkatan 2024, Inisial D</a></div>
+    </footer>
+
+    <div class="scroll-to-top" id="scrollToTop"><span>↑</span></div>
+
+<script>
+// ==================== JAVASCRIPT CODE ==================== //
+// Tidak ada perubahan pada JavaScript, kode tetap sama.
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.coverflow-item');
+    const dotsContainer = document.getElementById('dots');
+    const currentTitle = document.getElementById('current-title');
+    const currentDescription = document.getElementById('current-description');
+    const container = document.querySelector('.coverflow-container');
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
+    let currentIndex = 3;
+    let isAnimating = false;
+
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        mainMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.menu-item:not(.external)').forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                menuToggle.classList.remove('active');
+                mainMenu.classList.remove('active');
+            }
+        });
+    });
+
+    const imageData = [
+        { title: "Komunikasi Mengajar", description: "Program kerja dinas pengabdian masyarakat Himpunan Mahasiswa Ilmu Komunikasi" },
+        { title: "Pelatihan Medis", description: "Program kerja dinas pengabdian masyarakat Himpunan Mahasiswa Ilmu Komunikasi" },
+        { title: "Struck by cupid's arrow", description: "Deskripsi singkat untuk karya ketiga" },
+        { title: "Mentawai Island", description: "Pesona pantai, budaya, dan tradisi Mentawai yang menawan." },
+        { title: "Who's that girl?", description: "Mengenal sosok perempuan inspiratif di balik cerita uniknya." },
+        { title: " Woman's Day", description: "Rayakan peran & keberanian perempuan dalam setiap langkah." }
+    ];
+    
+    if (items.length > 0) {
+        if(dotsContainer) {
+            items.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.onclick = () => { window.goToIndex(index); handleUserInteraction(); };
+                dotsContainer.appendChild(dot);
+            });
+        }
+    }
+    
+    const dots = document.querySelectorAll('.dot');
+    let autoplayInterval = null;
+    let isPlaying = true;
+    const playIcon = document.querySelector('.play-icon');
+    const pauseIcon = document.querySelector('.pause-icon');
+
+    window.updateCoverflow = function() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        items.forEach((item, index) => {
+            let offset = index - currentIndex;
+            if (offset > items.length / 2) offset -= items.length;
+            else if (offset < -items.length / 2) offset += items.length;
+            
+            const absOffset = Math.abs(offset);
+            const sign = Math.sign(offset);
+            
+            let translateX = offset * 250;
+            let translateZ = -absOffset * 200;
+            let rotateY = -sign * Math.min(absOffset * 60, 60);
+            let opacity = 1 - (absOffset * 0.2);
+            let scale = 1 - (absOffset * 0.1);
+
+            if (absOffset > 3) {
+                opacity = 0;
+                translateX = sign * 800;
+            }
+
+            item.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+            item.style.opacity = opacity;
+            item.style.zIndex = 100 - absOffset;
+            item.classList.toggle('active', index === currentIndex);
+        });
+
+        dots.forEach((dot, index) => dot.classList.toggle('active', index === currentIndex));
+
+        if (currentTitle && imageData[currentIndex]) {
+            currentTitle.style.animation = 'none';
+            currentDescription.style.animation = 'none';
+            void currentTitle.offsetWidth;
+            currentTitle.textContent = imageData[currentIndex].title;
+            currentDescription.textContent = imageData[currentIndex].description;
+            currentTitle.style.animation = 'fadeIn 0.6s forwards';
+            currentDescription.style.animation = 'fadeIn 0.6s forwards';
+        }
+
+        setTimeout(() => { isAnimating = false; }, 600);
+    }
+
+    window.navigate = function(direction) {
+        if (isAnimating) return;
+        currentIndex = (currentIndex + direction + items.length) % items.length;
+        updateCoverflow();
+    }
+
+    window.goToIndex = function(index) {
+        if (isAnimating || index === currentIndex) return;
+        currentIndex = index;
+        updateCoverflow();
+    }
+
+    if (container) {
+        container.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') { navigate(-1); handleUserInteraction(); }
+            if (e.key === 'ArrowRight') { navigate(1); handleUserInteraction(); }
+        });
+    }
+
+    items.forEach((item, index) => {
+        item.addEventListener('click', () => { goToIndex(index); handleUserInteraction(); });
+        const img = item.querySelector('img');
+        const reflection = item.querySelector('.reflection');
+        if (img && reflection) {
+            img.onload = () => {
+                img.parentElement.classList.remove('image-loading');
+                reflection.style.backgroundImage = `url(${img.src})`;
+                reflection.style.backgroundSize = 'cover';
+                reflection.style.backgroundPosition = 'center';
+            };
+             if (img.complete) { img.onload(); }
+        }
+    });
+
+    function handleUserInteraction() { if (isPlaying) stopAutoplay(); }
+    
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayInterval = setInterval(() => navigate(1), 4000);
+        isPlaying = true;
+        if(playIcon) playIcon.style.display = 'none';
+        if(pauseIcon) pauseIcon.style.display = 'block';
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+        isPlaying = false;
+        if(playIcon) playIcon.style.display = 'block';
+        if(pauseIcon) pauseIcon.style.display = 'none';
+    }
+
+    window.toggleAutoplay = function() {
+        if (isPlaying) stopAutoplay(); else startAutoplay();
+    }
+    
+    document.querySelectorAll('.nav-button').forEach(el => el.addEventListener('click', handleUserInteraction));
+    
+    const sections = document.querySelectorAll('.section');
+    const menuItems = document.querySelectorAll('.menu-item:not(.external)');
+    const header = document.getElementById('header');
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+
+    function updateActiveMenuItem() {
+        const scrollPosition = window.scrollY + header.offsetHeight + 50;
+        let activeSectionId = null;
+
+        sections.forEach(section => {
+            if (scrollPosition >= section.offsetTop) {
+                activeSectionId = section.id;
+            }
+        });
+
+        menuItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${activeSectionId}`) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            header.classList.remove('scrolled');
+            scrollToTopBtn.classList.remove('visible');
+        }
+        updateActiveMenuItem();
+    });
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    document.querySelector('.logo-container').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    if(items.length > 0) {
+        updateCoverflow();
+        if(playIcon) startAutoplay();
+    }
+
+    const workItems = document.querySelectorAll('.work-item');
+    workItems.forEach(item => {
+        item.addEventListener('click', (event) => {
+            if (event.target.classList.contains('view-work-button')) {
+                return;
+            }
+            workItems.forEach(otherItem => {
+                if(otherItem !== item) {
+                    otherItem.classList.remove('work-item-active');
+                }
+            });
+            item.classList.toggle('work-item-active');
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.work-item')) {
+            workItems.forEach(item => {
+                item.classList.remove('work-item-active');
+            });
+        }
+    });
+
+    const cursorAura = document.querySelector('.cursor-aura');
+    window.addEventListener('mousemove', e => {
+        cursorAura.style.left = e.clientX + 'px';
+        cursorAura.style.top = e.clientY + 'px';
+    });
+    
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = card.offsetWidth / 2;
+            const centerY = card.offsetHeight / 2;
+            const rotateX = ((y - centerY) / centerY) * -10;
+            const rotateY = ((x - centerX) / centerX) * 10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    });
+
+});
+</script>
+</body>
+</html>
